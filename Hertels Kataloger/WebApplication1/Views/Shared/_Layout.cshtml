@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width = 1050, user-scalable = no" />
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/turn.min.js"></script>
+</head>
+<body>
+    <div class="nav-right visible-xs">
+        <div class="button" id="btn">
+            <div class="bar top"></div>
+            <div class="bar middle"></div>
+            <div class="bar bottom"></div>
+        </div>
+    </div>
+    <!-- nav-right -->
+    <main class="scrollbar" id="style-2">
+
+
+        <nav>
+            <div class="nav-right hidden-xs">
+                <div class="button" id="btn">
+                    <div class="bar top"></div>
+                    <div class="bar middle"></div>
+                    <div class="bar bottom"></div>
+                </div>
+            </div>
+            <!-- nav-right -->
+        </nav>
+
+        <div class="container body-content">
+            @RenderBody()
+        </div>
+
+    </main>
+
+    <div class="sidebar">
+
+        <ul class="sidebar-list">
+            <li class="sidebar-item"><a href="http://www.hertels.dk/da/"><img src="~/Content/img/hertels.png" /></a></li>
+            <li class="sidebar-item">@Html.ActionLink("Alle Kataloger", "Index", "Home")</li>
+            <li class="sidebar-item"><a href="http://www.hertels.dk/da/om-hertels">Om Os</a></li>
+            <li class="sidebar-item"><a href="http://www.hertels.dk/da/kontakt">Kontakt</a></li>
+            @using Microsoft.AspNet.Identity
+            @if (Request.IsAuthenticated)
+            {
+                using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+                {
+                    @Html.AntiForgeryToken()
+
+
+                    <li class="sidebar-item">@Html.ActionLink("Upload", "Uploader", "Uploader")</li>
+                    <li class="sidebar-item"><a href="javascript:document.getElementById('logoutForm').submit()">Log af</a></li>
+
+                }
+            }
+
+        </ul>
+
+    </div>
+
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script src="~/Scripts/index.js"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
